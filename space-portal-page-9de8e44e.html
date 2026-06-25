@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空间・ayx 专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f1f2f3;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+            color: #1e1f22;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .page-wrap {
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        /* hero 区域 —— 杂志式首页横幅 */
+        .hero {
+            background: linear-gradient(135deg, #f9fafb 0%, #eaecee 100%);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 36px;
+            padding: 3.5rem 2.5rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 12px 28px -12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.02);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 450;
+            letter-spacing: -0.02em;
+            color: #16181b;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #3e4248;
+            border-top: 1px dashed #c8cbcf;
+            padding-top: 1.2rem;
+            margin-top: 0.6rem;
+            display: inline-block;
+            font-weight: 380;
+        }
+
+        .hero .sub span {
+            background: #dde0e3;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #2f3338;
+            margin-right: 0.4rem;
+        }
+
+        /* 背景说明卡片 —— 杂志专题常用 */
+        .backdrop-card {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 1px solid #e8eaec;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.01);
+            padding: 2.2rem 2.6rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .backdrop-card h2 {
+            font-size: 1.6rem;
+            font-weight: 420;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.8rem;
+            color: #1b1d20;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .backdrop-card h2 small {
+            font-size: 0.9rem;
+            font-weight: 350;
+            color: #5a5f66;
+            background: #eff1f3;
+            padding: 0 0.8rem;
+            border-radius: 100px;
+        }
+
+        .backdrop-card p {
+            color: #2d3036;
+            margin-bottom: 0.8rem;
+        }
+
+        .backdrop-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 三段自然介绍 —— 三卡片网格 */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.6rem;
+            margin-bottom: 2.6rem;
+        }
+
+        .intro-card {
+            background: #ffffff;
+            border: 1px solid #e3e6e9;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem 1.8rem 1.6rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .intro-card:hover {
+            box-shadow: 0 8px 24px -8px rgba(0,0,0,0.04);
+        }
+
+        .intro-card .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #6f767e;
+            background: #eef0f2;
+            display: inline-block;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            margin-bottom: 0.6rem;
+        }
+
+        .intro-card h3 {
+            font-weight: 450;
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            color: #1b1d20;
+        }
+
+        .intro-card p {
+            font-size: 0.94rem;
+            color: #363b42;
+        }
+
+        /* FAQ 摘要 —— 轻量杂志附录 */
+        .faq-digest {
+            background: #ffffff;
+            border: 1px solid #e6e9ec;
+            border-radius: 28px;
+            padding: 1.8rem 2.4rem 2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.01);
+        }
+
+        .faq-digest h2 {
+            font-size: 1.3rem;
+            font-weight: 410;
+            color: #1e2125;
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eef0f2;
+            padding: 0.6rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-item q {
+            font-style: normal;
+            color: #2d3137;
+            font-weight: 390;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item .ans {
+            padding-left: 1.2rem;
+            font-size: 0.9rem;
+            color: #545a62;
+        }
+
+        .site-mention {
+            margin-top: 0.2rem;
+        }
+
+        /* 页尾访问提示 */
+        .page-footer {
+            background: #eef0f2;
+            border-radius: 32px;
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid #d7dbdf;
+            text-align: center;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.5), 0 2px 6px rgba(0,0,0,0.01);
+        }
+
+        .page-footer .main-link {
+            font-size: 1rem;
+            background: #ffffff;
+            padding: 0.3rem 1.6rem;
+            border-radius: 80px;
+            border: 1px solid #cbced2;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            transition: background 0.1s;
+        }
+
+        .page-footer .main-link a {
+            text-decoration: none;
+            color: #191b1f;
+            font-weight: 440;
+        }
+
+        .page-footer .main-link a:hover {
+            color: #1f2937;
+            text-decoration: underline 1px dotted #6e767e;
+            text-underline-offset: 3px;
+        }
+
+        .page-footer .note {
+            font-size: 0.8rem;
+            color: #565c64;
+            display: block;
+            margin-top: 0.4rem;
+        }
+
+        .page-footer .sep {
+            margin: 0 0.6rem;
+            color: #a0a7af;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dfe1e4;
+            margin: 2.2rem 0 1rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .hero {
+                padding: 2.5rem 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .backdrop-card {
+                padding: 1.8rem 1.4rem;
+            }
+            .faq-digest {
+                padding: 1.5rem 1.2rem;
+            }
+            .page-footer {
+                padding: 1.6rem 1rem;
+            }
+        }
+
+        @media (max-width: 440px) {
+            body {
+                padding: 1rem 0.6rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 首页横幅 hero -->
+    <div class="hero">
+        <h1>空间 · 记录 · 可信</h1>
+        <div class="sub">
+            <span>专题</span> 一个关于信息与边界的杂志式侧写
+        </div>
+    </div>
+
+    <!-- 背景说明卡片 -->
+    <div class="backdrop-card">
+        <h2>站点速写 <small>sketch</small></h2>
+        <p>从最初的想法到持续的内容积累，<a href="https://space-portal-ayx.com" style="color:#1e2125;text-decoration: underline 1px dashed #9da3ac; text-underline-offset: 4px;">ayx</a> 尝试用一种平实的语言整理网络空间里值得被记住的片段。没有夸张的包装，也没有急躁的许诺。</p>
+        <p>这个站点更像一本不断更新的手记——记录工具、思路、以及偶尔的灵感。你看到的每个条目都经过基本的筛选和核对，不追求面面俱到，但求言之有物。</p>
+        <p>如果你对某个话题好奇，或者只是想找一个安静的信息角落，不妨花几分钟随意翻翻。</p>
+    </div>
+
+    <!-- 三段自然介绍 -->
+    <div class="intro-grid">
+        <div class="intro-card">
+            <div class="label">01 / 内容</div>
+            <h3>轻量、聚焦</h3>
+            <p>没有信息过载，每篇都围绕一个明确的主题展开。从实用指南到背景梳理，文字尽量简短，插图只出现在需要的地方。</p>
+        </div>
+        <div class="intro-card">
+            <div class="label">02 / 风格</div>
+            <h3>日常质感</h3>
+            <p>避免僵硬的官方腔调，也不刻意追逐热门词。行文节奏接近和朋友聊天，同时保持基本的严谨与整洁。</p>
+        </div>
+        <div class="intro-card">
+            <div class="label">03 / 边界</div>
+            <h3>透明与克制</h3>
+            <p>哪些是经验，哪些是推测，会尽量标明。不搞噱头，不虚构数据，也不诱导你点击任何不明确的东西。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-digest">
+        <h2>常见疑问 · 摘要</h2>
+        <div class="faq-item">
+            <q>这个站主要发布什么内容？</q>
+            <div class="ans">以信息管理、数字生活、以及一些跨领域的笔记为主。不定期更新，不追热点。</div>
+        </div>
+        <div class="faq-item">
+            <q>内容可靠吗？</q>
+            <div class="ans">每篇文章都会标注参考来源或亲身经验。主观判断会以“我觉得”“个人认为”等方式区分。但仍建议你交叉验证关键信息。</div>
+        </div>
+        <div class="faq-item">
+            <q>可以直接通过 <a href="https://space-portal-ayx.com" style="color:#1e2125;text-decoration: underline 1px dotted #a0a7af; text-underline-offset: 3px;">ayx</a> 找到所有内容吗？</q>
+            <div class="ans">是的，所有公开的笔记和文章都聚合在那里。网站结构很直觉，没有隐藏菜单或付费墙。</div>
+        </div>
+        <div class="faq-item" style="border-bottom: none;">
+            <q>联系站长方便吗？</q>
+            <div class="ans">页面底部有基本的联系渠道，不过回复可能不会很快。请理解这是个人维护的站点。</div>
+        </div>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="page-footer">
+        <div class="main-link">
+            <a href="https://space-portal-ayx.com">ayx</a>
+        </div>
+        <span class="note">
+            直接浏览 · 无需注册 · 无跟踪脚本
+            <span class="sep">|</span> 更新节奏：不定期
+        </span>
+    </div>
+
+    <hr>
+    <div style="text-align: center; font-size: 0.7rem; color: #7c848d; padding-bottom: 0.4rem; letter-spacing: 0.03em;">
+        magazine style · 2025
+    </div>
+</div>
+</body>
+</html>
