@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>leyu · 站点介绍与使用说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f9fc;
+            color: #1f3a3f;
+            line-height: 1.6;
+            padding: 20px 16px 60px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 网格背景装饰 – 卡片风格 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 160, 150, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 160, 150, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Hero 区域 – 温和有层次 */
+        .hero {
+            text-align: center;
+            padding: 40px 0 32px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #136a6b;
+            margin-bottom: 10px;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #2f6b72;
+            background: rgba(0, 150, 140, 0.07);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 150, 140, 0.15);
+            backdrop-filter: blur(2px);
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 20px auto 0;
+            color: #3d5c60;
+            font-size: 1rem;
+        }
+
+        /* 卡片通用设计 */
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 40px 0 32px;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 28px 22px 32px;
+            box-shadow: 0 8px 24px rgba(0, 80, 80, 0.06), 0 2px 6px rgba(0, 60, 70, 0.04);
+            border: 1px solid rgba(0, 150, 140, 0.12);
+            flex: 1 1 280px;
+            max-width: 360px;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(0, 120, 115, 0.08);
+            border-color: rgba(0, 150, 140, 0.25);
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            background: #d8f0ed;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            color: #126b6b;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #115f60;
+            border-left: 4px solid #2aa198;
+            padding-left: 12px;
+        }
+
+        .card p, .card li {
+            color: #2e5459;
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card ul li::before {
+            content: "·";
+            position: absolute;
+            left: 6px;
+            color: #2aa198;
+            font-weight: bold;
+        }
+
+        /* 使用建议 —— 两个小卡片同排 */
+        .tips-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0 40px;
+        }
+
+        .tips-card {
+            flex: 1 1 240px;
+            background: #e4f3f0;
+            border-radius: 20px;
+            padding: 22px 20px;
+            border: 1px solid rgba(0, 150, 140, 0.2);
+        }
+
+        .tips-card h4 {
+            font-weight: 500;
+            color: #0a5a5a;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips-card p {
+            color: #1f4a4d;
+            font-size: 0.9rem;
+        }
+
+        .tips-card code {
+            background: #ffffffb0;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #0e6b6b;
+            border: 1px solid #b8ddd6;
+        }
+
+        /* FAQ摘要 – 简洁 */
+        .faq-mini {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 24px;
+            margin: 30px 0 36px;
+            box-shadow: 0 4px 16px rgba(0, 90, 85, 0.04);
+            border: 1px solid rgba(0, 140, 130, 0.1);
+        }
+
+        .faq-mini h3 {
+            font-weight: 500;
+            color: #115f60;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .faq-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #d2e7e3;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #0a4f4f;
+            min-width: 120px;
+            flex: 0 0 auto;
+        }
+
+        .faq-a {
+            color: #2d5c60;
+            flex: 1;
+            font-size: 0.92rem;
+        }
+
+        .faq-a a {
+            color: #0f7873;
+            text-decoration: none;
+            border-bottom: 1px dotted #2aa198;
+        }
+
+        .faq-a a:hover {
+            border-bottom-style: solid;
+            color: #0b5f5a;
+        }
+
+        /* 可信说明区域 – 克制 */
+        .trust-note {
+            background: #f0f9f7;
+            border-radius: 24px;
+            padding: 24px 20px;
+            margin: 20px 0 30px;
+            border-left: 6px solid #2aa198;
+            color: #1b494b;
+        }
+
+        .trust-note strong {
+            color: #0a5858;
+        }
+
+        /* 链接嵌入句子风格 */
+        .inline-link {
+            color: #0f7873;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #2aa198;
+            transition: border 0.1s;
+        }
+
+        .inline-link:hover {
+            border-bottom: 2px solid #136a6b;
+        }
+
+        /* 手机适应 */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .card {
+                max-width: 100%;
+                flex: 1 1 100%;
+            }
+            .tips-area {
+                flex-direction: column;
+            }
+            .faq-item {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .faq-q {
+                min-width: unset;
+            }
+        }
+
+        /* 小彩蛋：蓝绿色点缀 */
+        .accent-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #2aa198;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6d9295;
+            border-top: 1px solid #d2e7e3;
+            padding-top: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="container">
+
+    <!-- Hero 摘要 -->
+    <section class="hero">
+        <h1>leyu · 产品说明</h1>
+        <span class="sub">站点介绍与可信使用参考</span>
+        <p>
+            leyu 是一个面向特定需求的轻量信息站点，围绕内容整合与基础查询功能构建。
+            本页从产品说明角度，梳理其亮点、适用场景与使用建议，帮助访问者建立清晰、克制的认知。
+        </p>
+    </section>
+
+    <!-- 亮点卡片 (三个) -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="icon">📘</div>
+            <h3>信息聚焦</h3>
+            <p>站点内容围绕特定主题组织，减少冗余信息干扰。页面结构偏向简洁，适合快速浏览与定位。</p>
+        </div>
+        <div class="card">
+            <div class="icon">🧭</div>
+            <h3>基础导航</h3>
+            <p>提供清晰的分类入口，访问者可以按需选择板块，无需在多层菜单中反复跳转，降低认知负荷。</p>
+        </div>
+        <div class="card">
+            <div class="icon">🔄</div>
+            <h3>持续更新</h3>
+            <p>内容保持适度的更新节奏，以反映信息变化。适合需要定期关注该主题的用户作为参考来源之一。</p>
+        </div>
+    </div>
+
+    <!-- 使用建议 (差异化) -->
+    <div class="tips-area">
+        <div class="tips-card">
+            <h4><span class="accent-dot"></span> 建议使用场景</h4>
+            <p>当您需要快速了解该主题的基础信息、查询常用条目或对比相关内容时，<code>leyu</code> 可作为轻量入口之一。适合日常资讯浏览与初步调研。</p>
+        </div>
+        <div class="tips-card">
+            <h4><span class="accent-dot"></span> 可信使用提示</h4>
+            <p>本站点提供的信息经过基础整理，但仍建议交叉核实关键数据。网站运营方会持续优化内容准确性，但不对第三方引用做绝对保证。</p>
+        </div>
+        <div class="tips-card">
+            <h4><span class="accent-dot"></span> 访问方式</h4>
+            <p>直接通过浏览器访问 <a href="https://query-leyu.com.cn" class="inline-link">leyu</a> 即可，无需安装额外应用。移动端与桌面端均适配。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <h3>❓ 常见问题摘要</h3>
+        <div class="faq-item">
+            <span class="faq-q">leyu 是什么类型站点？</span>
+            <span class="faq-a">一个围绕特定主题提供信息聚合与基础查询的页面集合，功能上偏重浏览与参考。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">是否保证内容绝对准确？</span>
+            <span class="faq-a">我们尽力确保信息可靠，但建议对重要决策性信息进行多方验证。网站会定期核对并修正。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">如何开始使用？</span>
+            <span class="faq-a">直接打开 <a href="https://query-leyu.com.cn">leyu</a> 主页，通过导航或卡片入口浏览即可。无需注册或下载。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">移动端体验如何？</span>
+            <span class="faq-a">页面采用响应式布局，在手机浏览器上自动适配，阅读与点击区域均经过优化。</span>
+        </div>
+    </div>
+
+    <!-- 可信但克制的说明 -->
+    <div class="trust-note">
+        <strong>关于 leyu 的可信说明</strong><br>
+        本网站由独立团队维护，致力于提供清晰、不过度包装的内容。所有信息均基于公开资料与内部整理，不包含诱导性承诺或夸大表述。我们欢迎用户通过站点内提供的反馈渠道提出建议，帮助改善信息质量。请注意，任何在线资源都无法替代专业或官方渠道的确认，请根据自身判断合理使用。
+    </div>
+
+    <!-- 自然的嵌入链接句子 (已在本页多处出现，此处再补充一个自然段落) -->
+    <p style="margin: 20px 0 10px; font-size: 0.95rem; color: #2e5b5d;">
+        如果您希望进一步了解主题细节，可以直接访问 <a href="https://query-leyu.com.cn" class="inline-link">leyu</a> 查看完整内容。日常使用中，将其作为信息索引之一会较为高效。
+    </p>
+
+    <footer>
+        <span>© leyu 介绍页 · 内容仅供说明参考</span>
+    </footer>
+
+</div>
+</body>
+</html>
